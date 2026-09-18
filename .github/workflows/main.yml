@@ -17,15 +17,17 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Instalar Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Verificar Android SDK
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          echo "ANDROID_SDK_ROOT=$ANDROID_SDK_ROOT"
+          ls -la "$ANDROID_HOME"
 
       - name: Descompactar projeto
         run: |
           mkdir projeto
           unzip NexoraFit_Android_OnlineBuild.zip -d projeto
-          cd projeto
-          ls -la
+          find projeto -maxdepth 3 -type f | sort
 
       - name: Instalar Gradle
         uses: gradle/actions/setup-gradle@v4
